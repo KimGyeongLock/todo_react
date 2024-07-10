@@ -8,4 +8,4 @@ Context API, Custom Hook을 사용한 React 기반 Todo List
 * <s>삭제 기능</s>
 * 날짜별 분리
 
-<img width="1440" alt="image" src="https://github.com/KimGyeongLock/todo_react/assets/63464299/d4137fd2-f4c4-451c-a79c-9f953cd53d3b">
+<img width="1440" alt="image" src="https://github.com/KimGyeongLock/todo_react/assets/63464299/99eb4315-cb71-4d9b-b211-236dd2cf1353">
