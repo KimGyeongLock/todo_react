@@ -19,3 +19,9 @@
 input, button, p, ul, li {
   margin: 10px 0;
 }
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
