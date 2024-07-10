@@ -1,12 +1,14 @@
 import React, { useState } from "react"; 
-import useLocalStorage from "../useLocalStorage";
+// import useLocalStorage from "../useLocalStorage";
 import AppContent from "../components/AppContent";
+import withLocalStorage from "../hoc/withLocalStorage";
+import withTheme from "../hoc/withTheme";
 
-function AppContainer() {
+function AppContainer({ storedValue, setStoredValue, theme }) {
     const [name, setName] = useState('');
     const [task, setTask] = useState('');
     const [message, setMessage] = useState('');
-    const [todos, setTodos] = useLocalStorage('todos', []);
+    const [todos, setTodos] = useState(storedValue || []);
 
     const handleClick = () => {
         const currentTime = new Date();
@@ -24,12 +26,13 @@ function AppContainer() {
     
         const newTodo = { task, formattedTime };
         setTodos([...todos, newTodo]); // ...은 JavaScript의 스프레드 연산자(Spread Operator)
-        //기존의 todos 배열에 새로운 newTodo 항목을 추가하여 업데이트된 배열을 만드는 방식
+        setStoredValue([...todos, newTodo]);// 로컬 스토리지에 저장
     };
 
     const handleDelete = (index) => {
         const newTodo = todos.filter((_, i) => i !== index); // 첫번째 파라미터: 배열의 현재 요소, 두번째 파라미터: 현재 요소의 인덱스
         setTodos(newTodo);
+        setStoredValue(newTodo);// 로컬 스토리지에 저장
     }
 
     return (
@@ -42,8 +45,10 @@ function AppContainer() {
             handleDelete={handleDelete}
             message={message}
             todos={todos}
+            isDarkMode={theme.isDarkMode}
+            toggleTheme={theme.toggleTheme}
         />
     );
 }
 
-export default AppContainer;
+export default withLocalStorage('todos', [])(withTheme(AppContainer));

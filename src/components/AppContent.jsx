@@ -1,11 +1,10 @@
 import React from "react";
-import { useTheme } from "../ThemeContext";
+// import { useTheme } from "../ThemeContext";
 import { MdDelete } from "react-icons/md";
 import './AppContent.css';
 
-function AppContent({ name, setName, task, setTask, handleClick, handleDelete, message, todos }) {
-  const { isDarkMode, toggleTheme } = useTheme(); //useTheme 훅을 호출하여 isDarkMode와 toggleTheme에 쉽게 접근할 수 있습니다.
-
+function AppContent({ name, setName, task, setTask, handleClick, handleDelete, message, todos, isDarkMode, toggleTheme }) {
+  // const { isDarkMode, toggleTheme } = useTheme(); //useTheme 훅을 호출하여 isDarkMode와 toggleTheme에 쉽게 접근할 수 있습니다.
   return (
       //'container dark' or 'container light'
       <div className={`container ${isDarkMode ? 'dark' : 'light'}`}> 
