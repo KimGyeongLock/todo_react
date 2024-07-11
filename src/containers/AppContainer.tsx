@@ -4,11 +4,28 @@ import AppContent from "../components/AppContent";
 import withLocalStorage from "../hoc/withLocalStorage";
 import withTheme from "../hoc/withTheme";
 
-function AppContainer({ storedValue, setStoredValue, theme }) {
-    const [name, setName] = useState('');
-    const [task, setTask] = useState('');
-    const [message, setMessage] = useState('');
-    const [todos, setTodos] = useState(storedValue || []);
+interface Todo {
+    task: string;
+    formattedTime: string;
+}
+
+interface Theme {
+    isDarkMode: boolean;
+    toggleTheme: () => void;
+}
+//AppContainer 컴포넌트의 props와 상태를 타입으로 지정
+interface AppContainerProps {
+    storedValue: Todo[];
+    setStoredValue: (value: Todo[]) => void;
+    theme: Theme;
+}
+
+const AppContainer: React.FC<AppContainerProps> = ({ storedValue, setStoredValue, theme }) => {
+    //type annotation 추가 - 상태 변수의 타입을 명시적으로 지정
+    const [name, setName] = useState<string>('');
+    const [task, setTask] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [todos, setTodos] = useState<Todo[]>(storedValue || []);
 
     const handleClick = () => {
         const currentTime = new Date();
@@ -29,7 +46,7 @@ function AppContainer({ storedValue, setStoredValue, theme }) {
         setStoredValue([...todos, newTodo]);// 로컬 스토리지에 저장
     };
 
-    const handleDelete = (index) => {
+    const handleDelete = (index: number) => {
         const newTodo = todos.filter((_, i) => i !== index); // 첫번째 파라미터: 배열의 현재 요소, 두번째 파라미터: 현재 요소의 인덱스
         setTodos(newTodo);
         setStoredValue(newTodo);// 로컬 스토리지에 저장
